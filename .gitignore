@@ -4,3 +4,5 @@ TestResults.xml
 rad.json
 .output
 cache_*
+.alcache/
+.altemplates/
