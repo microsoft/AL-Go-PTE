@@ -50,7 +50,7 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v1.5
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@preview
         with:
           eventId: "DO0102"
 
@@ -60,7 +60,7 @@ jobs:
 
     steps:
       - name: Creating a new test app
-        uses: microsoft/AL-Go-Actions/CreateApp@v1.5
+        uses: microsoft/AL-Go-Actions/CreateApp@preview
         with:
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
           project: ${{ github.event.inputs.project }}
@@ -82,7 +82,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v1.5
+        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@preview
         with:
           eventId: "DO0102"
           telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
