@@ -33,8 +33,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          lfs: true
 
       - name: Initialize the workflow
         id: init
@@ -86,6 +84,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          lfs: true
 
       - name: Read settings
         uses: microsoft/AL-Go-Actions/ReadSettings@v1.5
