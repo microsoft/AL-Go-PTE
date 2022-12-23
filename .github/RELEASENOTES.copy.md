@@ -7,6 +7,9 @@ Note that when using the preview version of AL-Go for GitHub, you need to Update
 - Issue #229 Create Release action tags wrong commit
 - Issue #283 Create Release workflow uses deprecated actions
 
+### Build modes support
+AL-Go projects can now be built in different modes, by specifying the _buildModes_ setting in AL-Go-Settings.json. Read more about build modes in the [Basic Repository settings](https://github.com/microsoft/AL-Go/blob/main/Scenarios/settings.md#basic-repository-settings).
+
 ### Continuous Delivery
 
 Continuous Delivery can now run from other branches than main. By specifying a property called branches, containing an array of branches in the deliveryContext json construct, the artifacts generated from this branch are also delivered. The branch specification can include wildcards (like release/*). Default is main, i.e. no changes to functionality.
@@ -19,6 +22,10 @@ Continuous Deployment can now run from other branches than main. By creating a r
 When locating artifacts for the various projects, the SHA used to build the artifact is used for the release tag
 If all projects are not available with the same SHA, this error is thrown: **The build selected for release doesn't contain all projects. Please rebuild all projects by manually running the CI/CD workflow and recreate the release.**
 There is no longer a hard dependency on the main branch name from Create Release.
+
+### Experimental Support
+Setting the repo setting "shell" to "pwsh", followed by running Update AL-Go System Files, will cause all PowerShell code to be run using PowerShell 7 instead of PowerShell 5. This functionality is experimental. Please report any issues at https://github.com/microsoft/AL-Go/issues
+Setting the repo setting "runs-on" to "Ubuntu-Latest", followed by running Update AL-Go System Files, will cause all non-build jobs to run using Linux. This functionality is experimental. Please report any issues at https://github.com/microsoft/AL-Go/issues
 
 ## v2.2
 
