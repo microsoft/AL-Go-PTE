@@ -99,7 +99,7 @@ jobs:
           $sha = ''
           $allArtifacts = @()
           $page = 1
-          $headers = @{ 
+          $headers = @{
             "Authorization" = "token ${{ github.token }}"
             "Accept"        = "application/json"
           }
@@ -228,7 +228,7 @@ jobs:
           $ErrorActionPreference = "STOP"
           Set-StrictMode -version 2.0
           Write-Host "Downloading artifact ${{ matrix.name}}"
-          $headers = @{ 
+          $headers = @{
               "Authorization" = "token ${{ github.token }}"
               "Accept"        = "application/vnd.github.v3+json"
           }

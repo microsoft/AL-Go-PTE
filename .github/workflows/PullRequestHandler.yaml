@@ -30,7 +30,7 @@ jobs:
           $ErrorActionPreference = "STOP"
           Set-StrictMode -version 2.0
           $sb = [System.Text.StringBuilder]::new()
-          $headers = @{             
+          $headers = @{
               "Authorization" = 'token ${{ secrets.GITHUB_TOKEN }}'
               "Accept" = "application/vnd.github.baptiste-preview+json"
           }

@@ -25,7 +25,7 @@ $webClient.DownloadFile('https://raw.githubusercontent.com/microsoft/AL-Go-Actio
 
 Import-Module $GitHubHelperPath
 . $ALGoHelperPath -local
-    
+
 $baseFolder = GetBaseFolder -folder $PSScriptRoot
 $project = GetProject -baseFolder $baseFolder -projectALGoFolder $PSScriptRoot
 
