@@ -4,5 +4,69 @@
             "path": ".AL-Go"
         }
     ],
-    "settings": {}
+  "settings": {
+    "al.assemblyProbingPaths": [
+      "./.netpackages",
+      "C:/Windows/assembly/"
+    ],
+    "al.backgroundCodeAnalysis": false,
+    "al.codeAnalyzers": [
+      "${CodeCop}",
+      "${UICop}",
+      "${analyzerFolder}BusinessCentral.LinterCop.dll"
+    ],
+    "al.enableCodeActions": true,
+    "al.enableCodeAnalysis": true,
+    "alOutline.addDataItemToReportColumnName": true,
+    "alOutline.addToolTipsToPageFields": true,
+    "alOutline.codeActionsOnSave": [
+      "SortVariables",
+      "SortProperties",
+      "FormatDocument",
+      "SortPermissions"
+    ],
+    "alOutline.codeCleanupActions": [
+      "AddApplicationAreas",
+      "AddMissingParentheses",
+      "ConvertObjectIdsToNames",
+      "FixIdentifiersCase",
+      "FixKeywordsCase",
+      "MakeFlowFieldsReadOnly",
+      "RemoveEmptyTriggers",
+      "RemoveEmptySections",
+      "RemoveStrSubstNoFromError",
+      "RemoveWithStatements",
+      "RemoveUnusedVariables",
+      "RemoveEmptyLines",
+      "SortVariables",
+      "TrimTrailingWhitespace",
+      "FormatDocument"
+    ],
+    "alOutline.fixCaseRemovesQuotesFromDataTypeIdentifiers": true,
+    "alOutline.fixCodeCopMissingParenthesesOnSave": true,
+    "alOutline.openDefinitionInNewTab": true,
+    "CRS.ExtensionObjectNamePattern": "<BaseName><Suffix>",
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.ObjectNameSuffix": " CGK",
+    "CRS.OnSaveAlFileAction": "Reorganize",
+    "CRS.RemovePrefixFromFilename": true,
+    "CRS.RemoveSuffixFromFilename": true,
+    "CRS.RenameWithGit": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications",
+    "files.autoSave": "afterDelay",
+    "files.trimTrailingWhitespace": true,
+    "githubPullRequests.assignCreated": "${user}",
+    "githubPullRequests.defaultMergeMethod": "squash",
+    "githubPullRequests.pullBranch": "always",
+    "githubPullRequests.pushBranch": "always",
+    "gitlens.advanced.blame.customArguments": [
+      "-CCC"
+    ],
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "gitlens.blame.ignoreWhitespace": true,
+    "workbench.iconTheme": "vscode-icons"
+  }
 }
