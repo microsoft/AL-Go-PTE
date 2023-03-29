@@ -1,5 +1,6 @@
 {
   "artifact": "////latest",
   "cacheImageName": "",
-  "versioningStrategy": 15
+  "versioningStrategy": 15,
+  "doNotRunBcptTests": false
 }

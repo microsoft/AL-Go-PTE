@@ -7,6 +7,7 @@ Thumbs.db
 TestResults*.xml
 bcptTestResults*.json
 BuildOutput.txt
+launch.json
 rad.json
 .output/
 .dependencies/
@@ -15,6 +16,7 @@ rad.json
 .packages/
 .alcache/
 .altemplates/
+.altestrunner
 .snapshots/
 cache_*
 ~$*
