@@ -1,13 +1,34 @@
+## v3.0
+
+### **NOTE:** When upgrading to this version
+When upgrading to this version form earlier versions of AL-Go for GitHub, you will need to run the _Update AL-Go System Files_ workflow twice if you have the `useProjectDependencies` setting set to _true_.
+
+### Issues
+- Issue #391 Create release action - CreateReleaseBranch error
+- Issue #434 Building local DevEnv, downloading dependencies: Authentication fails when using "gh auth status"
+
+### Changes to Pull Request Process
+In v2.4 and earlier, the PullRequestHandler would trigger the CI/CD workflow to run the PR build.
+Now, the PullRequestHandler will perform the build and the CI/CD workflow is only run on push (or manual dispatch) and will perform a complete build.
+
+### Build modes per project
+Build modes can now be specified per project
+
+### New Actions
+- **DetermineProjectsToBuild** is used to determine which projects to build in PullRequestHandler, CI/CD, Current, NextMinor and NextMajor workflows.
+- **CalculateArtifactNames** is used to calculate artifact names in PullRequestHandler, CI/CD, Current, NextMinor and NextMajor workflows.
+- **VerifyPRChanges** is used to verify whether a PR contains changes, which are not allowed from a fork.
+
 ## v2.4
 
 ### Issues
-- Issue [#171](https://github.com/microsoft/AL-Go/issues/171) create a workspace file when creating a project
-- Issue [#356](https://github.com/microsoft/AL-Go/issues/356) Publish to AppSource fails in multi project repo
-- Issue [#358](https://github.com/microsoft/AL-Go/issues/358) Publish To Environment Action stopped working in v2.3
-- Issue [#362](https://github.com/microsoft/AL-Go/issues/362) Support for EnableTaskScheduler
-- Issue [#360](https://github.com/microsoft/AL-Go/issues/360) Creating a release and deploying from a release branch
-- Issue [#371](https://github.com/microsoft/AL-Go/issues/371) 'No previous release found' for builds on release branches
-- Issue [#376](https://github.com/microsoft/AL-Go/issues/376) CICD jobs that are triggered by the pull request trigger run directly to an error if title contains quotes
+- Issue #171 create a workspace file when creating a project
+- Issue #356 Publish to AppSource fails in multi project repo
+- Issue #358 Publish To Environment Action stopped working in v2.3
+- Issue #362 Support for EnableTaskScheduler
+- Issue #360 Creating a release and deploying from a release branch
+- Issue #371 'No previous release found' for builds on release branches
+- Issue #376 CICD jobs that are triggered by the pull request trigger run directly to an error if title contains quotes
 
 ### Release Branches
 **NOTE:** Release Branches are now only named after major.minor if the patch value is 0 in the release tag (which must be semver compatible)
