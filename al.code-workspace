@@ -22,12 +22,6 @@
     "al.enableCodeAnalysis": true,
     "alOutline.addDataItemToReportColumnName": true,
     "alOutline.addToolTipsToPageFields": true,
-    "alOutline.codeActionsOnSave": [
-      "SortVariables",
-      "SortProperties",
-      "FormatDocument",
-      "SortPermissions"
-    ],
     "alOutline.codeCleanupActions": [
       "AddApplicationAreas",
       "AddMissingParentheses",
@@ -53,7 +47,6 @@
     "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
     "CRS.ObjectNameSuffix": " CCL",
-    "CRS.OnSaveAlFileAction": "Reorganize",
     "CRS.RemovePrefixFromFilename": true,
     "CRS.RemoveSuffixFromFilename": true,
     "CRS.RenameWithGit": false,
