@@ -1,0 +1,11 @@
+{
+    "name": "Cegeka AT Ruleset",
+    "description": "Standard ruleset defined by Cegeka AT",
+    "rules": [
+        {
+            "id": "AA0072",
+            "action": "None",
+            "justification": "Extensive naming pattern is intrusive and unnecessary when working with VS Code."
+        }
+    ]
+}
