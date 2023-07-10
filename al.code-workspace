@@ -5,6 +5,14 @@
     },
     {
       "path": ".github"
+    },
+    {
+      "path": "resources",
+      "name": "Resources"
+    },
+    {
+      "path": "scripts",
+      "name": "Scripts"
     }
   ],
   "settings": {

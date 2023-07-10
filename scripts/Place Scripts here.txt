@@ -1,0 +1,5 @@
+Place any scripts related to the project here, such as:
+
+- custom launch configurations
+- PowerShell/Bash scripts
+...
