@@ -20,6 +20,7 @@
     ],
     "al.enableCodeActions": true,
     "al.enableCodeAnalysis": true,
+    "al.ruleSetPath": "..\\CegekaAT.ruleset.json",
     "alOutline.addDataItemToReportColumnName": true,
     "alOutline.addToolTipsToPageFields": true,
     "alOutline.codeCleanupActions": [
