@@ -5,4 +5,5 @@
   "enableUICop": true,
   "enablePerTenantExtensionCop": false,
   "doNotRunBcptTests": true
+  "rulesetFile": "custom.ruleset.json"
 }
