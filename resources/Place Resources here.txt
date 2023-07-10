@@ -1,0 +1,7 @@
+Place any resources related to the project here, such as:
+
+- images
+- PDFs
+- config packages
+- FOB files
+...
