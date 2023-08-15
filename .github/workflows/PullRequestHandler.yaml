@@ -34,7 +34,7 @@ jobs:
           lfs: true
           ref: refs/pull/${{ github.event.number }}/merge
 
-      - uses: microsoft/AL-Go/Actions/VerifyPRChanges@2fe6957474551c86641234cfc3ea97d03b986e53
+      - uses: microsoft/AL-Go-Actions/VerifyPRChanges@v3.2
 
   Initialization:
     needs: [ PregateCheck ]
@@ -57,14 +57,14 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@2fe6957474551c86641234cfc3ea97d03b986e53
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v3.2
         with:
           shell: powershell
           eventId: "DO0104"
 
       - name: Read settings
         id: ReadSettings
-        uses: microsoft/AL-Go/Actions/ReadSettings@2fe6957474551c86641234cfc3ea97d03b986e53
+        uses: microsoft/AL-Go-Actions/ReadSettings@v3.2
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -77,7 +77,7 @@ jobs:
           
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: microsoft/AL-Go/Actions/DetermineProjectsToBuild@2fe6957474551c86641234cfc3ea97d03b986e53
+        uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@v3.2
         with:
           shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -116,7 +116,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@2fe6957474551c86641234cfc3ea97d03b986e53
+        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v3.2
         with:
           shell: powershell
           eventId: "DO0104"
