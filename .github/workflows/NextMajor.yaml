@@ -34,14 +34,14 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@eabe480ba72260c6805e575f6bd03ac129367160
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@13989cd251c3eddc64f3603248f6148619ecd88e
         with:
           shell: powershell
           eventId: "DO0099"
 
       - name: Read settings
         id: ReadSettings
-        uses: microsoft/AL-Go/Actions/ReadSettings@eabe480ba72260c6805e575f6bd03ac129367160
+        uses: microsoft/AL-Go/Actions/ReadSettings@13989cd251c3eddc64f3603248f6148619ecd88e
         with:
           shell: powershell
 
@@ -52,7 +52,7 @@ jobs:
 
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: microsoft/AL-Go/Actions/DetermineProjectsToBuild@eabe480ba72260c6805e575f6bd03ac129367160
+        uses: microsoft/AL-Go/Actions/DetermineProjectsToBuild@13989cd251c3eddc64f3603248f6148619ecd88e
         with:
           shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -89,7 +89,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@eabe480ba72260c6805e575f6bd03ac129367160
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@13989cd251c3eddc64f3603248f6148619ecd88e
         with:
           shell: powershell
           eventId: "DO0099"
