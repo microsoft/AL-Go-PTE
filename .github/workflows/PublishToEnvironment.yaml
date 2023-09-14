@@ -38,20 +38,20 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@7839c2380d659b294268251d23c2643c6bf067d7
         with:
           shell: powershell
           eventId: "DO0097"
 
       - name: Read settings
         id: ReadSettings
-        uses: microsoft/AL-Go/Actions/ReadSettings@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/ReadSettings@7839c2380d659b294268251d23c2643c6bf067d7
         with:
           shell: powershell
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@7839c2380d659b294268251d23c2643c6bf067d7
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -69,7 +69,7 @@ jobs:
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/ReadSecrets@7839c2380d659b294268251d23c2643c6bf067d7
         if: steps.DetermineDeploymentEnvironments.outputs.UnknownEnvironment == 1
         with:
           shell: powershell
@@ -101,7 +101,7 @@ jobs:
             Write-Host "No AuthContext provided for $envName, initiating Device Code flow"
             $ALGoHelperPath = "$([System.IO.Path]::GetTempFileName()).ps1"
             $webClient = New-Object System.Net.WebClient
-            $webClient.DownloadFile('https://raw.githubusercontent.com/microsoft/AL-Go/31be77d8466260c22e324516ec543285e6dfc521/Actions/AL-Go-Helper.ps1', $ALGoHelperPath)
+            $webClient.DownloadFile('https://raw.githubusercontent.com/microsoft/AL-Go/7839c2380d659b294268251d23c2643c6bf067d7/Actions/AL-Go-Helper.ps1', $ALGoHelperPath)
             . $ALGoHelperPath
             DownloadAndImportBcContainerHelper
             $authContext = New-BcAuthContext -includeDeviceLogin -deviceLoginTimeout ([TimeSpan]::FromSeconds(0))
@@ -131,20 +131,20 @@ jobs:
           Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "envName=$envName"
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/ReadSettings@7839c2380d659b294268251d23c2643c6bf067d7
         with:
           shell: powershell
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/ReadSecrets@7839c2380d659b294268251d23c2643c6bf067d7
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
           getSecrets: '${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext,${{ steps.envName.outputs.envName }}-EnvironmentName,${{ steps.envName.outputs.envName }}_EnvironmentName,EnvironmentName,projects'
 
       - name: Deploy
-        uses: microsoft/AL-Go/Actions/Deploy@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/Deploy@7839c2380d659b294268251d23c2643c6bf067d7
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -164,7 +164,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@31be77d8466260c22e324516ec543285e6dfc521
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@7839c2380d659b294268251d23c2643c6bf067d7
         with:
           shell: powershell
           eventId: "DO0097"
