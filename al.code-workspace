@@ -7,12 +7,13 @@
       "path": ".github"
     },
     {
-      "path": "resources",
-      "name": "Resources"
+      "path": "dependencies"
     },
     {
-      "path": "scripts",
-      "name": "Scripts"
+      "path": "resources"
+    },
+    {
+      "path": "scripts"
     }
   ],
   "settings": {
@@ -28,7 +29,8 @@
     ],
     "al.enableCodeActions": true,
     "al.enableCodeAnalysis": true,
-    "al.ruleSetPath": "..\\CegekaAT.ruleset.json",
+    "al.enableExternalRulesets": true,
+    "al.ruleSetPath": "../CegekaAT.ruleset.json",
     "alOutline.addDataItemToReportColumnName": true,
     "alOutline.addToolTipsToPageFields": true,
     "alOutline.codeCleanupActions": [
@@ -50,6 +52,7 @@
     ],
     "alOutline.fixCaseRemovesQuotesFromDataTypeIdentifiers": true,
     "alOutline.fixCodeCopMissingParenthesesOnSave": true,
+    "alOutline.idReservationProvider": "ALObjectIdNinja",
     "alOutline.openDefinitionInNewTab": true,
     "CRS.ExtensionObjectNamePattern": "<Prefix><BaseName><Suffix>",
     "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
@@ -70,7 +73,6 @@
       "-CCC"
     ],
     "gitlens.advanced.fileHistoryFollowsRenames": true,
-    "gitlens.blame.ignoreWhitespace": true,
-    "workbench.iconTheme": "vscode-icons"
+    "gitlens.blame.ignoreWhitespace": true
   }
 }
