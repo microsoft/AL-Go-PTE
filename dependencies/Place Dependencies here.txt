@@ -1,0 +1,8 @@
+Place any artifacts the project is dependent on here, such as:
+
+- BC extension apps
+...
+
+When adding a new app required to publish this project, ensure
+that the relative path to the app or parent folder is included
+in the array "installApps" in `.AL-Go\settings.json`.
