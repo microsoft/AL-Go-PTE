@@ -1,6 +1,6 @@
 {
   "type": "PTE",
-  "templateUrl": "https://github.com/CBS-BC-AT/AL-Go@main",
+  "templateUrl": "https://github.com/microsoft/AL-Go@main",
   "enableCodeCop": true,
   "enableUICop": true,
   "enablePerTenantExtensionCop": false,
