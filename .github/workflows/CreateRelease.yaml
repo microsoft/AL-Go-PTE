@@ -69,26 +69,26 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           eventId: "DO0094"
 
       - name: Read settings
         id: ReadSettings
-        uses: microsoft/AL-Go/Actions/ReadSettings@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/ReadSettings@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           get: templateUrl,repoName
 
       - name: Determine Projects
         id: determineProjects
-        uses: microsoft/AL-Go/Actions/DetermineProjectsToBuild@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/DetermineProjectsToBuild@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
 
       - name: Check for updates to AL-Go system files
-        uses: microsoft/AL-Go/Actions/CheckForUpdates@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/CheckForUpdates@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -173,7 +173,7 @@ jobs:
 
       - name: Prepare release notes
         id: createreleasenotes
-        uses: microsoft/AL-Go/Actions/CreateReleaseNotes@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/CreateReleaseNotes@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -216,13 +216,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/ReadSettings@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/ReadSecrets@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -259,7 +259,7 @@ jobs:
             });
 
       - name: Deliver to NuGet
-        uses: microsoft/AL-Go/Actions/Deliver@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/Deliver@31944622373d473cf9b727a320333e170290265b
         if: ${{ fromJson(steps.ReadSecrets.outputs.Secrets).nuGetContext != '' }}
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
@@ -272,7 +272,7 @@ jobs:
           atypes: 'Apps,TestApps'
 
       - name: Deliver to Storage
-        uses: microsoft/AL-Go/Actions/Deliver@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/Deliver@31944622373d473cf9b727a320333e170290265b
         if: ${{ fromJson(steps.ReadSecrets.outputs.Secrets).storageContext != '' }}
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
@@ -309,13 +309,13 @@ jobs:
     needs: [ CreateRelease, UploadArtifacts ]
     steps:
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/ReadSettings@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/ReadSecrets@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -323,7 +323,7 @@ jobs:
           useGhTokenWorkflowForPush: '${{ github.event.inputs.useGhTokenWorkflow }}'
 
       - name: Update Version Number
-        uses: microsoft/AL-Go/Actions/IncrementVersionNumber@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/IncrementVersionNumber@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           token: ${{ steps.ReadSecrets.outputs.TokenForPush }}
@@ -341,7 +341,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           eventId: "DO0094"
