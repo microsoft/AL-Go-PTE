@@ -41,19 +41,19 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           eventId: "DO0090"
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/ReadSettings@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/ReadSecrets@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -61,7 +61,7 @@ jobs:
           useGhTokenWorkflowForPush: '${{ github.event.inputs.useGhTokenWorkflow }}'
 
       - name: Add existing app
-        uses: microsoft/AL-Go/Actions/AddExistingApp@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/AddExistingApp@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           token: ${{ steps.ReadSecrets.outputs.TokenForPush }}
@@ -72,7 +72,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@460e5582330ac797f44075a61407fe830967ceac
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@31944622373d473cf9b727a320333e170290265b
         with:
           shell: powershell
           eventId: "DO0090"
