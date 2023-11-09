@@ -20,3 +20,5 @@ rad.json
 .snapshots/
 cache_*
 ~$*
+
+!dependencies/**/*

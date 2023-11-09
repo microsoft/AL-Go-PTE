@@ -1,8 +1,10 @@
 {
-  "type": "PTE",
-  "templateUrl": "https://github.com/microsoft/AL-Go@main",
   "enableCodeCop": true,
-  "enableUICop": true,
   "enablePerTenantExtensionCop": false,
-  "doNotRunBcptTests": true
+  "enableUICop": true,
+  "runs-on": "ubuntu-latest",
+  "skipUpgrade": true,
+  "templateUrl": "https://github.com/CBS-BC-AT/AL-Go@main",
+  "type": "PTE",
+  "UseCompilerFolder": true
 }
