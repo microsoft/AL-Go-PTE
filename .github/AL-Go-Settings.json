@@ -2,6 +2,7 @@
   "enableCodeCop": true,
   "enablePerTenantExtensionCop": false,
   "enableUICop": true,
+  "githubRunner": "ubuntu-latest",
   "runs-on": "ubuntu-latest",
   "skipUpgrade": true,
   "templateUrl": "https://github.com/CBS-BC-AT/AL-Go@main",
