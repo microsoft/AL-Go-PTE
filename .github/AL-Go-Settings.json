@@ -1,4 +1,5 @@
 {
+  "doNotPublishApps": true,
   "enableCodeCop": true,
   "enablePerTenantExtensionCop": false,
   "enableUICop": true,
@@ -7,5 +8,5 @@
   "skipUpgrade": true,
   "templateUrl": "https://github.com/CBS-BC-AT/AL-Go@main",
   "type": "PTE",
-  "UseCompilerFolder": true
+  "useCompilerFolder": true
 }
