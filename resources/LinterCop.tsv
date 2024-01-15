@@ -1,0 +1,52 @@
+Id	Title	Default Severity	New Severity
+LC0000	There was an error in a Linter Rule	Info	
+LC0001	FlowFields should not be editable.	Warning	
+LC0002	Commit() needs a comment to justify its existence. Either a leading or a trailing comment.	Warning	
+LC0003	Do not use an Object ID for properties or variables declaration. Use {1} instead.	Warning	
+LC0004	"Property ""LookupPageID"" and ""DrilldownPageID"" must be filled in table because it is used in list page"	Warning	
+LC0005	Wrong casing detected!	Warning	
+LC0006	AutoIncrement fields are not possible in temporary tables!	Error	
+LC0007	DataPerCompany is missing!	Hidden	
+LC0008	Filter operators should not be used in SetRange. Use SetFilter instead.	Warning	
+LC0009	Cyclomatic complexity and Maintainability index	Info	
+LC0010	Cyclomatic complexity and Maintainability index	Warning	
+LC0011	Access property is missing!	Hidden	
+LC0012	Wrong Parameter detected.	Warning	
+LC0013	NotBlank should be set explicitly for tables with a single-field primary key.	Warning	
+LC0014	The Caption of permissionset objects should not exceed the maximum length.	Warning	
+LC0015	All application objects should be covered by at least one permission set in the extension.	Warning	
+LC0016	Caption is missing.	Warning	
+LC0017	Writing to a FlowField is not common. Add a comment to explain this.	Warning	
+LC0018	Events in internal codeunits are not accessible to extensions and should therefore be avoided.	Info	
+LC0019	Data Classification is equal to the Table. Remove to reduce redundancy.	Info	
+LC0020	Applicatication Area is equal to the Page. Remove to reduce redundancy.	Info	
+LC0021	"Confirm() must be implemented through the ""Confirm Management"" codeunit from the System Application."	Info	
+LC0022	"GlobalLanguage() must be implemented through the ""Translation Helper"" codeunit from the Base Application."	Info	
+LC0023	"Fieldgroup ""{0}"" is missing on table ""{1}""."	Info	
+LC0024	Procedure declaration should not end with semicolon.	Info	
+LC0025	Procedure must be either local, internal or define a documentation comment.	Hidden	
+LC0026	ToolTip must end with a dot.	Info	
+LC0027	"Utilize the ""Page Management"" codeunit for launching page."	Info	
+LC0028	Event subscriber arguments now use identifier syntax instead of string literals.	Info	
+LC0029	Use CompareDateTime method in Type Helper codeunit for DateTime variable comparisons.	Info	
+LC0030	Set Access property to Internal for Install/Upgrade codeunits.	Info	
+LC0031	Set ReadIsolation property instead of LockTable method.	Info	
+LC0032	Clear(All) does not affect or change values for global variables in '{0}: Codeunit {1}'.	Warning	
+LC0033	The specified runtime version in app.json is falling behind. The project targets {0} version {1} and the current runtime is {2}. Update the runtime to {3} for compatibility with the latest runtime features.	Info	
+LC0034	The property Extensible should be explicitly set for {0} objects.	Hidden	
+LC0035	Explicitly set AllowInCustomizations for fields omitted on pages.	Info	
+LC0036	"ToolTip must start with the verb ""Specifies""."	Info	
+LC0037	Do not use line breaks in ToolTip.	Info	
+LC0038	Try to not exceed 200 characters (including spaces).	Info	
+LC0039	Argument {0}: cannot convert from '{1}' to '{2}'.	Warning	
+LC0040	Explicitly set the RunTrigger parameter on build-in methods.	Info	
+LC0041	Empty captions should be locked.	Info	
+LC0042	The SetAutoCalcFields method should only be used with FlowFields or fields of type Blob. The field {0} is not a FlowField or of type Blob.	Warning	
+LC0043	Use SecretText type to protect credentials and sensitive textual values from being revealed.	Info	
+LC0044	Records '{0}' and '{1}' have conflicting fields with the same ID	Warning	
+LC0045	Zero (0) Enum value should be reserved for Empty Value.	Info	
+LC0046	Label with suffix Tok must be locked.	Info	
+LC0047	Locked Label must have a suffix Tok.	Info	
+LC0048	Use Error with a ErrorInfo or Label variable to improve telemetry details.	Info	
+LC0049	SourceTable property not defined on {0} '{1}'.	Info	
+LC0050	Operator '{0}' found in filter expression, currently treated as a literal character. Implement StrSubstNo() to apply as operator.	Info	

@@ -1,0 +1,17 @@
+Id	Title	Category	Default Severity	New Severity
+AW0001	The Web client does not support displaying the Request page of XMLPorts.	WebClient	Warning	
+AW0002	The Web client does not support displaying both Actions and Fields in Cue Groups. Only Fields will be displayed.	WebClient	Warning	
+AW0003	The Web client does not support displaying Repeater controls containing Parts.	WebClient	Warning	
+AW0004	A Blob cannot be used as a source expression for a page field.	WebClient	Warning	
+AW0005	Actions should use the Image property.	WebClient	Info	
+AW0006	Pages and reports should use the UsageCategory and ApplicationArea properties to be searchable.	WebClient	Info	
+AW0007	The Web client does not support displaying Repeater controls that contain FlowFilter fields.	WebClient	Error	
+AW0008	The Web client only supports displaying Repeater controls in pages of type List, ListPart, and Worksheet.	WebClient	Warning	
+AW0009	Using a Blob with subtype Bitmap on a page field is deprecated. Instead use the Media/MediaSet data types.	WebClient	Warning	
+AW0010	A Repeater control used on a List page must be defined at the beginning of the area(Content) section.	WebClient	Warning	
+AW0011	"Add PromotedOnly=""true"" to some or all promoted actions to avoid identical actions from appearing in both the promoted and default sections of the command bar."	WebClient	Info	
+AW0012	The Web client does not support properties for teaching tips in certain contexts.	WebClient	Warning	
+AW0013	Groups containing promoted actions should not be hidden.	WebClient	Warning	
+AW0014	Groups containing ActionRef targets should not be hidden.	WebClient	Warning	
+AW0015	Actions with scope repeater must be promoted.	WebClient	Warning	
+AW0016	Rich Text Editor fields are only allowed while alone in a FastTab group.	WebClient	Warning	

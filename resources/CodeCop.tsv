@@ -1,0 +1,81 @@
+Id	Title	Category	Default Severity	New Severity
+AA0001	There must be exactly one space character on each side of a binary operator such as := + - AND OR =.	Readability	Warning	
+AA0002	There must be no space character.	Readability	Warning	
+AA0003	There must be exactly one space character between the NOT operator and its argument.	Readability	Warning	
+AA0005	Only use BEGIN..END to enclose compound statements.	Readability	Warning	
+AA0008	Function calls should have parenthesis even if they do not have any parameters.	Readability	Warning	
+AA0013	When BEGIN follows THEN, ELSE, DO, it should be on the same line, preceded by one space character.	Readability	Warning	
+AA0018	The END, IF, REPEAT, UNTIL, FOR, WHILE, and CASE statement should always start a line.	Readability	Warning	
+AA0021	Variable declarations should be ordered by type.	Readability	Warning	
+AA0022	Substitute the IF THEN ELSE structure with a CASE.	Readability	Warning	
+AA0040	Avoid using nested WITH statements.	Readability	Warning	
+AA0050	Permission set extensions should not include permissions for objects defined in another application.	Design	Warning	
+AA0051	Permission set extensions should not include permission sets defined in another application.	Design	Warning	
+AA0052	Permission set extensions should not include permission sets which include permissions for objects defined in another application.	Design	Warning	
+AA0053	Permission set extensions should not include wildcard permissions.	Design	Warning	
+AA0072	The name of variables and parameters must be suffixed with the type or object name.	Readability	Info	
+AA0073	The name of temporary variable must be prefixed with Temp.	Readability	Warning	
+AA0074	TextConst and Label variable names should have an approved suffix.	Readability	Warning	
+AA0087	Lowering permissions should only be used in tests	Design	Warning	
+AA0100	Do not have identifiers with quotes in the name.	Design	Warning	
+AA0101	Use camel case property values in pages of type API.	Design	Warning	
+AA0102	Use camel case name for field controls in pages of type API.	Design	Warning	
+AA0103	Use camel case property values in queries of type API.	Design	Warning	
+AA0104	Use camel case name for column controls in queries of type API.	Design	Warning	
+AA0105	PagePart controls must not refer to parent pages.	Design	Error	
+AA0106	A page of type API can only refer to the same subpage once.	Design	Error	
+AA0131	String parameters must match placeholders.	Design	Warning	
+AA0136	Do not write code that will never be hit.	Design	Warning	
+AA0137	Do not declare variables that are unused.	Design	Warning	
+AA0139	Do not assign a text to a target with smaller size.	Design	Warning	
+AA0150	Do not declare parameters by reference if their values are never changed.	Design	Warning	
+AA0161	Only use AssertError in Test Codeunits.	Design	Warning	
+AA0175	Only find record if you need to use it.	Design	Warning	
+AA0181	The FindSet() or Find() methods must be used only in connection with the Next() method.	Design	Warning	
+AA0189	Only use a correct values of ApplicationArea.	Design	Warning	
+AA0194	Only write actions that have an effect.	Design	Warning	
+AA0198	Do not use identical names for local and global variables.	Design	Warning	
+AA0199	Use only a correct order for ApplicationArea.	Design	Warning	
+AA0200	When ApplicationArea is set to 'All', no other values for ApplicationArea should be specified.	Design	Warning	
+AA0201	When ApplicationArea is set to 'Basic', you must also specify 'Suite'.	Design	Warning	
+AA0202	To avoid confusion, do not give local variables the same name as fields, methods, or actions in the same scope.	Design	Warning	
+AA0203	To avoid confusion, do not give methods the same name as fields or actions in the same scope.	Design	Warning	
+AA0204	To avoid confusion, do not give global variables the same name as fields, methods, or actions in the same scope.	Design	Warning	
+AA0205	Variables must be initialized before usage.	Design	Warning	
+AA0206	The value assigned to a variable must be used.	Design	Warning	
+AA0207	The EventSubscriber method must be local.	Design	Warning	
+AA0210	Avoid non-indexed fields into filtering.	Design	Info	
+AA0211	Avoids a runtime error from using CalcFields on a field that is not a FlowField or a field of type Blob.	Design	Warning	
+AA0213	Obsoleted object must have a state 'Pending' or 'Removed' and a justification specifying why this field is being obsoleted.	Design	Warning	
+AA0214	The local record should be modified before saving to the database.	Design	Warning	
+AA0215	Follow the style guide about the best practices for naming.	Readability	Warning	
+AA0216	Use a text constant for passing user messages and errors without concatenations.	Localizability	Warning	
+AA0217	Use a text constant or label for format string in StrSubstNo.	Localizability	Warning	
+AA0218	You must write a tooltip in the Tooltip property for all controls of type Action and Field that exist on page objects.	Localizability	Warning	
+AA0219	The Tooltip property of Fields must start with 'Specifies'.	Localizability	Warning	
+AA0220	The value of the Tooltip property of Fields must be filled.	Localizability	Warning	
+AA0221	You must specify a OptionCaption property for all fields which source expressions is not a table field.	Localizability	Warning	
+AA0222	SIFT index should not be used on primary or unique key.	Design	Warning	
+AA0223	The value of the OptionCaption property of Fields must be filled in.	Localizability	Warning	
+AA0224	The count of option captions specified in the OptionCaption property is wrong.	Localizability	Warning	
+AA0225	You must specify a caption in the Caption property for Fields that exist on page objects.	Localizability	Warning	
+AA0226	The value of the Caption property of Fields must be filled in.	Localizability	Warning	
+AA0227	Optional return value should not be omitted in upgrade codeunits.	Design	Warning	
+AA0228	The local method must be used; otherwise removed.	Design	Warning	
+AA0230	Version should not be specified for internal assemblies.	Design	Warning	
+AA0231	StrSubstNo or string concatenation must not be used as a parameter in the Error method.	Design	Warning	
+AA0232	The FlowField of a table should be indexed.	Design	Info	
+AA0233	Use Get(), FindFirst() and FindLast() without Next() method.	Design	Warning	
+AA0235	When using 'OnInstallAppPerCompany' you should also add 'Company-Initialize'::'OnCompanyInitialize' event subscriber.	Design	Info	
+AA0237	The name of non-temporary variables must not be prefixed with Temp.	Readability	Warning	
+AA0240	Email and Phone No must not be present in any part of the source code.	Design	Warning	
+AA0241	Use all lowercase letters for reserved language keywords.	Readability	Hidden	
+AA0242	Limit JIT loads by selecting all fields for load.	Design	Warning	
+AA0243	Running an upgrade codeunit is not allowed.	Design	Warning	
+AA0244	Do not use identical names for parameters and global variables.	Design	Warning	
+AA0245	To avoid confusion, do not give parameters the same name as fields, methods, or actions in the same scope.	Design	Warning	
+AA0246	Suppressing all diagnostics is not allowed.	Design	Warning	
+AA0247	Use namespaces.	Design	Info	
+AA0448	You must use the FieldCaption method instead of the FieldName method and TableCaption method instead of TableName method.	Localizability	Warning	
+AA0462	The CalcDate should only be used with DataFormula variables. Alternatively the string should be enclosed using the <> symbols.	Localizability	Warning	
+AA0470	Placeholders should have a comment explaining their content.	Localizability	Warning	
