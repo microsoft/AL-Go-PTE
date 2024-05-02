@@ -10,7 +10,8 @@ Param(
     [pscredential] $credential = $null,
     [string] $licenseFileUrl = "",
     [switch] $fromVSCode,
-    [switch] $accept_insiderEula
+    [switch] $accept_insiderEula,
+    [switch] $clean
 )
 
 $errorActionPreference = "Stop"; $ProgressPreference = "SilentlyContinue"; Set-StrictMode -Version 2.0
@@ -31,11 +32,11 @@ Write-Host -ForegroundColor Yellow @'
 $webClient = New-Object System.Net.WebClient
 $webClient.CachePolicy = New-Object System.Net.Cache.RequestCachePolicy -argumentList ([System.Net.Cache.RequestCacheLevel]::NoCacheNoStore)
 $webClient.Encoding = [System.Text.Encoding]::UTF8
-$GitHubHelperUrl = 'https://raw.githubusercontent.com/microsoft/AL-Go/dd5c9ebf4bd06d33d45a26aa2fb3d0620277b1d0/Actions/Github-Helper.psm1'
+$GitHubHelperUrl = 'https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v5.1/Github-Helper.psm1'
 Write-Host "Downloading GitHub Helper module from $GitHubHelperUrl"
 $GitHubHelperPath = "$([System.IO.Path]::GetTempFileName()).psm1"
 $webClient.DownloadFile($GitHubHelperUrl, $GitHubHelperPath)
-$ALGoHelperUrl = 'https://raw.githubusercontent.com/microsoft/AL-Go/dd5c9ebf4bd06d33d45a26aa2fb3d0620277b1d0/Actions/AL-Go-Helper.ps1'
+$ALGoHelperUrl = 'https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v5.1/AL-Go-Helper.ps1'
 Write-Host "Downloading AL-Go Helper script from $ALGoHelperUrl"
 $ALGoHelperPath = "$([System.IO.Path]::GetTempFileName()).ps1"
 $webClient.DownloadFile($ALGoHelperUrl, $ALGoHelperPath)
@@ -135,7 +136,8 @@ CreateDevEnv `
     -auth $auth `
     -credential $credential `
     -licenseFileUrl $licenseFileUrl `
-    -accept_insiderEula:$accept_insiderEula
+    -accept_insiderEula:$accept_insiderEula `
+    -clean:$clean
 }
 catch {
     Write-Host -ForegroundColor Red "Error: $($_.Exception.Message)`nStacktrace: $($_.scriptStackTrace)"
