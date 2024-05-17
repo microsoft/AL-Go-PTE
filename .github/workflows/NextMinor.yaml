@@ -2,6 +2,8 @@ name: ' Test Next Minor'
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 6'
 
 permissions:
   contents: read
