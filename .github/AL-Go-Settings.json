@@ -1,5 +1,11 @@
 {
   "type": "PTE",
   "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
-  "templateSha": "0af8feb4cf098ebec44278866877fc9aceff0513"
+  "templateSha": "0af8feb4cf098ebec44278866877fc9aceff0513",
+  "enableCodeCop": true,
+  "enableUICop": true,
+  "CurrentSchedule": "0 2 * * *",
+  "NextMinorSchedule": "0 2 * * 6",
+  "NextMajorSchedule": "0 2 * * 0",
+  "UpdateGitHubGoSystemFilesSchedule": "0 2 * * 1"
 }
