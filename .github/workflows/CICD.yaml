@@ -5,6 +5,8 @@ on:
   push:
     paths-ignore:
       - '**.md'
+      - '**.png'
+      - '**.jpg'
       - '.github/workflows/*.yaml'
       - '!.github/workflows/CICD.yaml'
     branches: [ 'main', 'release/*', 'feature/*' ]
