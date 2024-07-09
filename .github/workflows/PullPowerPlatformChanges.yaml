@@ -37,7 +37,7 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@3ecb65a53dfa9187e7b329bebdc443e42c6dde51
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@5eeeec54ab7e6a9d97701effe420ef74bda08c67
         with:
           shell: powershell
           eventId: "DO0103"
@@ -51,14 +51,14 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "envName=$envName"
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@3ecb65a53dfa9187e7b329bebdc443e42c6dde51
+        uses: microsoft/AL-Go/Actions/ReadSettings@5eeeec54ab7e6a9d97701effe420ef74bda08c67
         with:
           shell: powershell
           get: powerPlatformSolutionFolder
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@3ecb65a53dfa9187e7b329bebdc443e42c6dde51
+        uses: microsoft/AL-Go/Actions/ReadSecrets@5eeeec54ab7e6a9d97701effe420ef74bda08c67
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -67,7 +67,7 @@ jobs:
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@3ecb65a53dfa9187e7b329bebdc443e42c6dde51
+        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@5eeeec54ab7e6a9d97701effe420ef74bda08c67
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -89,7 +89,7 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "solutionFolder=$solutionFolder"
 
       - name: Pull changes from Power Platform environment
-        uses: microsoft/AL-Go/Actions/PullPowerPlatformChanges@3ecb65a53dfa9187e7b329bebdc443e42c6dde51
+        uses: microsoft/AL-Go/Actions/PullPowerPlatformChanges@5eeeec54ab7e6a9d97701effe420ef74bda08c67
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -102,7 +102,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@3ecb65a53dfa9187e7b329bebdc443e42c6dde51
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@5eeeec54ab7e6a9d97701effe420ef74bda08c67
         with:
           shell: powershell
           eventId: "DO0103"
