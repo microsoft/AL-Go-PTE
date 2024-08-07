@@ -19,9 +19,10 @@ on:
         default: false
 
 permissions:
+  actions: read
   contents: write
-  pull-requests: write
   id-token: write
+  pull-requests: write
 
 defaults:
   run:
@@ -37,10 +38,9 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@381a1e2d859ecafd242ca80a45449caf3c8b7fd5
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         with:
           shell: powershell
-          eventId: "DO0103"
 
       - name: EnvName
         env:
@@ -51,14 +51,14 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "envName=$envName"
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@381a1e2d859ecafd242ca80a45449caf3c8b7fd5
+        uses: microsoft/AL-Go/Actions/ReadSettings@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         with:
           shell: powershell
           get: powerPlatformSolutionFolder
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@381a1e2d859ecafd242ca80a45449caf3c8b7fd5
+        uses: microsoft/AL-Go/Actions/ReadSecrets@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -67,7 +67,7 @@ jobs:
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@381a1e2d859ecafd242ca80a45449caf3c8b7fd5
+        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -89,7 +89,7 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "solutionFolder=$solutionFolder"
 
       - name: Pull changes from Power Platform environment
-        uses: microsoft/AL-Go/Actions/PullPowerPlatformChanges@381a1e2d859ecafd242ca80a45449caf3c8b7fd5
+        uses: microsoft/AL-Go/Actions/PullPowerPlatformChanges@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -102,8 +102,10 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@381a1e2d859ecafd242ca80a45449caf3c8b7fd5
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           shell: powershell
-          eventId: "DO0103"
           telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
+          currentJobContext: ${{ toJson(job) }}
