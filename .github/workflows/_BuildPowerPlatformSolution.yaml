@@ -61,14 +61,14 @@ jobs:
           lfs: true
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@75ef430ead72a4c0c4753fb328ecf0257c20c510
+        uses: microsoft/AL-Go-Actions/ReadSettings@v5.3
         with:
           shell: ${{ inputs.shell }}
           project: ${{ inputs.project }}
           get: type,powerPlatformSolutionFolder,appRevision,appBuild
 
       - name: Build
-        uses: microsoft/AL-Go/Actions/BuildPowerPlatform@75ef430ead72a4c0c4753fb328ecf0257c20c510
+        uses: microsoft/AL-Go-Actions/BuildPowerPlatform@v5.3
         with:
           shell: ${{ inputs.shell }}
           solutionFolder: ${{ inputs.project }}
@@ -79,7 +79,7 @@ jobs:
 
       - name: Calculate Artifact names
         id: calculateArtifactsNames
-        uses: microsoft/AL-Go/Actions/CalculateArtifactNames@75ef430ead72a4c0c4753fb328ecf0257c20c510
+        uses: microsoft/AL-Go-Actions/CalculateArtifactNames@v5.3
         if: success() || failure()
         with:
           shell: ${{ inputs.shell }}
@@ -88,7 +88,7 @@ jobs:
           suffix: ${{ inputs.artifactsNameSuffix }}
 
       - name: Publish artifacts - Power Platform Solution
-        uses: actions/upload-artifact@89ef406dd8d7e03cfd12d9e0a4a378f454709029 # v4.3.5
+        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
         if: inputs.publishArtifacts
         with:
           name: ${{ steps.calculateArtifactsNames.outputs.PowerPlatformSolutionArtifactsName }}
