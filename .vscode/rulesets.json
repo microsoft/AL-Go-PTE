@@ -1,0 +1,303 @@
+{
+ 
+    "name": "EB Strict Rules",
+ 
+    "description": "Strict Rules all EB Development will follow.",
+ 
+    "generalAction": "Error",
+ 
+    "rules": [
+ 
+        {
+ 
+            "id": "AA0072",
+ 
+            "action": "Error",
+ 
+            "justification": "Required Variable Names meet Standard."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0073",
+ 
+            "action": "Error",
+ 
+            "justification": "The name of temporary variable must be prefixed with Temp."
+ 
+        },  
+ 
+        {
+ 
+            "id": "AA0074",
+ 
+            "action": "Error",
+ 
+            "justification": "TextConst and Label variable names should have an approved suffix."
+ 
+        },      
+ 
+        {
+ 
+            "id": "AA0470",
+ 
+            "action": "Error",
+ 
+            "justification": "Required Explanation of Placeholders in Label Variable."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0021",
+ 
+            "action": "Error",
+ 
+            "justification": "Variable declarations should be ordered by type."
+ 
+        },
+ 
+        {
+ 
+            "id": "LC0047",
+ 
+            "action": "Error",
+ 
+            "justification": "Require Locked Label must have a suffix Tok."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0198",
+ 
+            "action": "Error",
+ 
+            "justification": "Require that Global and Local Variable Names do not overlap."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0237",
+ 
+            "action": "Error",
+ 
+            "justification": "Require that Non-Temporary Variables cannot be prefixed temp"
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0137",
+ 
+            "action": "Error",
+ 
+            "justification": "Remove all unused variables to keep cleaner code."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0244",
+ 
+            "action": "Error",
+ 
+            "justification": "No Duplications between Global and Local Variables"
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0231",
+ 
+            "action": "Error",
+ 
+            "justification": "Do not use StrSubstNo in Error Messages"
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0008",
+ 
+            "action": "Error",
+ 
+            "justification": "Function calls should have parenthesis even if they do not have any parameters."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0018",
+ 
+            "action": "Error",
+ 
+            "justification": "The END, IF, REPEAT, UNTIL, FOR, WHILE, and CASE statement should always start a line."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0100",
+ 
+            "action": "Error",
+ 
+            "justification": "Do not have identifiers with quotes in the name."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0131",
+ 
+            "action": "Error",
+ 
+            "justification": "String parameters must match placeholders."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0136",
+ 
+            "action": "Error",
+ 
+            "justification": "Don't write code that can never be hit"
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0175",
+ 
+            "action": "Error",
+ 
+            "justification": "Only find record if you need to use it."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0202",
+ 
+            "action": "Error",
+ 
+            "justification": "To avoid confusion, do not give local variables the same name as fields, methods, or actions in the same scope."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0203",
+ 
+            "action": "Error",
+ 
+            "justification": "To avoid confusion, do not give methods the same name as fields or actions in the same scope."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0204",
+ 
+            "action": "Error",
+ 
+            "justification": "To avoid confusion, do not give global variables the same name as fields, methods, or actions in the same scope."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0205",
+ 
+            "action": "Error",
+ 
+            "justification": "Always initialize a variable before usage. This can improve readability and make debugging easier."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0206",
+ 
+            "action": "Error",
+ 
+            "justification": "The variable '{Variable Name}' is initialized but not used."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0211",
+ 
+            "action": "Error",
+ 
+            "justification": "Avoids a runtime error from using CalcFields on a field that is not a FlowField or a field of type Blob."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0217",
+ 
+            "action": "Error",
+ 
+            "justification": "Use a text constant or label for format string in StrSubstNo."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0216",
+ 
+            "action": "Error",
+ 
+            "justification": "Use a text constant for passing user messages and errors without concatenations."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0220",
+ 
+            "action": "Error",
+ 
+            "justification": "The value of the Tooltip property of Fields must be filled."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0226",
+ 
+            "action": "Error",
+ 
+            "justification": "The value of the Caption property of Fields must be filled in."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0228",
+ 
+            "action": "Error",
+ 
+            "justification": "The local method must be used; otherwise removed."
+ 
+        },
+ 
+        {
+ 
+            "id": "AA0245",
+ 
+            "action": "Error",
+ 
+            "justification": "To avoid confusion, do not give parameters the same name as fields, methods, or actions in the same scope."
+ 
+        }
+ 
+    ]
+ 
+}

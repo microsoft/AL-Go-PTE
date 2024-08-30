@@ -1,0 +1,32 @@
+{
+  "id": "c5ab6843-0158-4105-a9de-263cdca4e1ac",
+  "name": "<<CustomerName>>",
+  "publisher": "Eide Bailly",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "https://www.eidebailly.com/privacy-statement",
+  "EULA": "https://www.eidebailly.com/eula",
+  "help": "https://www.eidebailly.com/technology-support",
+  "url": "https://www.eidebailly.com/services/digital/technology-partners/microsoft",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 50200,
+      "to": 50399
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}

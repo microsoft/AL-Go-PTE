@@ -1,0 +1,38 @@
+{
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+        "${PerTenantExtensionCop}",
+        "${CodeCop}",
+        "${UICop}"
+    ],
+    "CRS.ObjectNameSuffix": " PTE",
+    "CRS.OnSaveAlFileAction": "Rename",
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.RenameWithGit": true,
+    "al.ruleSetPath": "./.vscode/rulesets.json",
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/.alcache": true,
+        "**/.altemplates": true
+    },
+    "alOutline.codeCleanupActions": [
+        "FixKeywordsCase",
+        "SortVariables",
+        "SortProcedures",
+        "SortProperties",
+        "FormatDocument",
+        "MakeFlowFieldsReadOnly",
+        "RemoveEmptyLines",
+        "RemoveEmptySections",
+        "RemoveRedundantDataClassification",
+        "SortPermissions",
+        "SortPermissionSetList",
+        "TrimTrailingWhitespace",
+        "RemoveWithStatements",
+        "RemoveBeginEnd"
+    ]
+}
