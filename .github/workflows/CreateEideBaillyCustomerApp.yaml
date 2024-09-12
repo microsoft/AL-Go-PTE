@@ -1,0 +1,41 @@
+name: Create Eide Bailly Customer App
+
+on:
+  workflow_dispatch:
+    inputs:
+        reponame:
+          description: New Repo Name
+          required: true
+
+permissions:
+  actions: read
+  contents: write
+  id-token: write
+  pull-requests: write
+
+jobs:
+  create-new-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the current repository
+      - name: Checkout current repo
+        uses: actions/checkout@v3
+
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh
+
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Create new repository
+        run: gh repo create ${{ github.repository_owner }}/new-repo-name --private --clone
+        cd new-repo-name
+
+      # Copy files from the current repostiroy to the new repository
+      - name: Copy repository files
+        run: |
+          cp -r ../* .
+          git add .
+          git commit -m "Initiailze repostiroy with template"
+          git push origin main
