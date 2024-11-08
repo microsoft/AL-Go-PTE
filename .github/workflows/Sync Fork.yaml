@@ -5,12 +5,15 @@ on:
     - cron: '0 0 * * 1'  # Runs weekly on Monday at midnight
   workflow_dispatch:  # Allows for manual triggering of the workflow
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout fork
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           persist-credentials: false  # Disable credentials to avoid pushing with the default token
           fetch-depth: 0
