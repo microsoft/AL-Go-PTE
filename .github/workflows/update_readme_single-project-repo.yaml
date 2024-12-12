@@ -1,0 +1,177 @@
+name: Update README with Tables
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Generate Tables
+        run: |
+          SETTINGS_PATH=".AL-Go/settings.json"
+          FALLBACK_PATH=""
+          PROBING_PATH_TABLE="### App Dependency Probing Paths Table\n\n| Application | Repo | Release Status |\n|-------------|------|----------------|"
+
+          # First, check if the root settings file has appDependencyProbingPaths
+          if jq -e '.appDependencyProbingPaths' "$SETTINGS_PATH" > /dev/null 2>&1; then
+            echo "Using SETTINGS_PATH: $SETTINGS_PATH"
+          fi
+
+          # Parse appDependencyProbingPaths if found and map them to applications
+          if jq -e '.appDependencyProbingPaths' "$SETTINGS_PATH" > /dev/null 2>&1; then
+            PROBING_PATHS=$(jq -r '.appDependencyProbingPaths[] | [.repo, .release_status] | @tsv' "$SETTINGS_PATH")
+            echo "Found appDependencyProbingPaths in settings file."
+            while IFS=$'\t' read -r repo release_status; do
+                echo "Probing path: $repo, $release_status"
+                # Extract the directory path up to the project level
+                app_folder=$(dirname "$SETTINGS_PATH")
+                # Format the path relative to the repo root
+                relative_path=$(realpath --relative-to="$(pwd)" "$app_folder")
+                PROBING_PATH_TABLE+="\n| $relative_path | $repo | $release_status |"
+                echo "App Path: $relative_path, Repo: $repo, Release Status: $release_status"
+            done <<< "$PROBING_PATHS"
+          else
+            echo "No appDependencyProbingPaths found in either settings file."
+          fi
+
+          # Write the App Dependency Probing Paths table to a markdown file
+          echo -e "$PROBING_PATH_TABLE" > probing_paths_table.md
+          cat probing_paths_table.md
+
+          # Generate the App Information Table with additional columns
+          APP_TABLE="### App Information Table\n\n| App | From | To | Dependencies | Conflict |\n|-----|------|----|-------------|----------|"
+          START_FROM=50000
+          MAX_TO=99999
+          PREV_TO=$((START_FROM - 1))
+
+          mapfile -t SORTED_ROWS < <(
+            find . -maxdepth 3 -type f -name "app.json" -exec dirname {} \; | while IFS= read -r folder; do
+              FROM=$(grep -m 1 '"from":' "$folder/app.json" | sed 's/[^0-9]*//g')
+              TO=$(grep -m 1 '"to":' "$folder/app.json" | sed 's/[^0-9]*//g')
+              NAME=$(grep -m 1 '"name":' "$folder/app.json" | sed 's/.*"name": \"\(.*\)\".*/\1/')
+              DEPENDENCIES=$(jq -r '.dependencies[] | "\(.publisher) - \(.name) (\(.version))"' "$folder/app.json" | paste -sd ', ' -)
+              
+              if [ -n "$FROM" ] && [ -n "$TO" ] && [ -n "$NAME" ]; then
+                echo "$FROM:$TO:$NAME:$DEPENDENCIES"
+              fi
+            done | sort -t':' -k1,1n
+          )
+
+          DECLARED_RANGES=()
+          for row in "${SORTED_ROWS[@]}"; do
+            FROM=$(echo "$row" | cut -d':' -f1)
+            TO=$(echo "$row" | cut -d':' -f2)
+            NAME=$(echo "$row" | cut -d':' -f3)
+            DEPENDENCIES=$(echo "$row" | cut -d':' -f4)
+
+            if [[ "$FROM" =~ ^[0-9]+$ ]] && [[ "$TO" =~ ^[0-9]+$ ]]; then
+              CONFLICT=""
+              for declared_range in "${DECLARED_RANGES[@]}"; do
+                DECLARED_FROM=$(echo "$declared_range" | cut -d':' -f1)
+                DECLARED_TO=$(echo "$declared_range" | cut -d':' -f2)
+                if [ "$FROM" -le "$DECLARED_TO" ] && [ "$TO" -ge "$DECLARED_FROM" ]; then
+                  CONFLICT="⚠️"
+                  break
+                fi
+              done
+              DECLARED_RANGES+=("$FROM:$TO")
+              if [ "$PREV_TO" -lt "$((FROM - 1))" ]; then
+                GAP_FROM=$((PREV_TO + 1))
+                GAP_TO=$((FROM - 1))
+                APP_TABLE+="\n| (empty) | $GAP_FROM | $GAP_TO | | |"
+              fi
+              APP_TABLE+="\n| $NAME | $FROM | $TO | $DEPENDENCIES | $CONFLICT |"
+              PREV_TO=$TO
+            fi
+          done
+
+          if [ "$PREV_TO" -lt "$MAX_TO" ]; then
+            GAP_FROM=$((PREV_TO + 1))
+            GAP_TO=$MAX_TO
+            APP_TABLE+="\n| (empty) | $GAP_FROM | $GAP_TO | | |"
+          fi
+
+          echo -e "$APP_TABLE" > app_table.md
+          cat app_table.md
+
+
+      - name: Generate DeployTo Table
+        run: |
+          SETTINGS_PATH=".AL-Go/settings.json"
+          DEPLOY_TABLE="### Deployment Information Table\n\n| Deployment Type | Environment Name | Continuous Deployment |\n|-----------------|-----------------|-----------------------|"
+
+          echo "Checking for DeployTos in SETTINGS_PATH: $SETTINGS_PATH"
+          if [ -f "$SETTINGS_PATH" ]; then
+            DEPLOYMENTS=$(jq -r '
+              to_entries[] | 
+              select(.key | startswith("DeployTo")) | 
+              [.key, .value.EnvironmentName, .value.continuousDeployment] | 
+              @tsv' "$SETTINGS_PATH")
+            
+            echo "DeployTos added from SETTINGS_PATH: $SETTINGS_PATH"
+          fi
+
+          if [ -n "$DEPLOYMENTS" ]; then
+            while IFS=$'\t' read -r deploy_type env_name cont_deploy; do
+              DEPLOY_TABLE+="\n| $deploy_type | $env_name | $cont_deploy |"
+            done <<< "$DEPLOYMENTS"
+          fi
+
+          # Write the DeployTo table to deploy_table.md
+          echo -e "$DEPLOY_TABLE" > deploy_table.md
+          cat deploy_table.md
+
+      - name: Update README.md with Tables
+        run: |
+          APP_TABLE_CONTENT=$(<app_table.md)
+          DEPLOY_TABLE_CONTENT=$(<deploy_table.md)
+          PROBING_PATH_TABLE_CONTENT=$(<probing_paths_table.md)
+          # Update App Information Table
+          if grep -q "<!-- start_app_table -->" README.md && grep -q "<!-- end_app_table -->" README.md; then
+            sed -i "/<!-- start_app_table -->/,/<!-- end_app_table -->/{ /<!-- start_app_table -->/{p; r app_table.md
+            }; /<!-- end_app_table -->/p; d }" README.md
+          else
+            echo -e "\n<!-- start_app_table -->\n$APP_TABLE_CONTENT\n<!-- end_app_table -->\n" >> README.md
+          fi
+          # Update App Dependency Probing Paths Table
+          if grep -q "<!-- start_probing_paths_table -->" README.md && grep -q "<!-- end_probing_paths_table -->" README.md; then
+            sed -i "/<!-- start_probing_paths_table -->/,/<!-- end_probing_paths_table -->/{ /<!-- start_probing_paths_table -->/{p; r probing_paths_table.md
+            }; /<!-- end_probing_paths_table -->/p; d }" README.md
+          else
+            echo -e "\n<!-- start_probing_paths_table -->\n$PROBING_PATH_TABLE_CONTENT\n<!-- end_probing_paths_table -->\n" >> README.md
+          fi
+          # Update DeployTo Table
+          if grep -q "<!-- start_deploy_table -->" README.md && grep -q "<!-- end_deploy_table -->" README.md; then
+            sed -i "/<!-- start_deploy_table -->/,/<!-- end_deploy_table -->/{ /<!-- start_deploy_table -->/{p; r deploy_table.md
+            }; /<!-- end_deploy_table -->/p; d }" README.md
+          else
+            echo -e "\n<!-- start_deploy_table -->\n$DEPLOY_TABLE_CONTENT\n<!-- end_deploy_table -->\n" >> README.md
+          fi
+          echo "README.md after updating tables:"
+          cat README.md
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions Bot"
+          git add README.md
+          git commit -m "Update README.md with generated tables" || echo "No changes to commit"
+          git push || echo "Nothing to push"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
