@@ -46,9 +46,9 @@ Write-Host -ForegroundColor Yellow @'
 
 $tmpFolder = Join-Path ([System.IO.Path]::GetTempPath()) "$([Guid]::NewGuid().ToString())"
 New-Item -Path $tmpFolder -ItemType Directory -Force | Out-Null
-$GitHubHelperPath = DownloadHelperFile -url 'https://raw.githubusercontent.com/microsoft/AL-Go/44100a28d57e2c582859205900ac519d9d76c57c/Actions/Github-Helper.psm1' -folder $tmpFolder
-$ALGoHelperPath = DownloadHelperFile -url 'https://raw.githubusercontent.com/microsoft/AL-Go/44100a28d57e2c582859205900ac519d9d76c57c/Actions/AL-Go-Helper.ps1' -folder $tmpFolder
-DownloadHelperFile -url 'https://raw.githubusercontent.com/microsoft/AL-Go/44100a28d57e2c582859205900ac519d9d76c57c/Actions/Packages.json' -folder $tmpFolder | Out-Null
+$GitHubHelperPath = DownloadHelperFile -url 'https://raw.githubusercontent.com/microsoft/AL-Go/53811370cf37a0a8b2d0a87f279a564ce6975595/Actions/Github-Helper.psm1' -folder $tmpFolder
+$ALGoHelperPath = DownloadHelperFile -url 'https://raw.githubusercontent.com/microsoft/AL-Go/53811370cf37a0a8b2d0a87f279a564ce6975595/Actions/AL-Go-Helper.ps1' -folder $tmpFolder
+DownloadHelperFile -url 'https://raw.githubusercontent.com/microsoft/AL-Go/53811370cf37a0a8b2d0a87f279a564ce6975595/Actions/Packages.json' -folder $tmpFolder | Out-Null
 
 Import-Module $GitHubHelperPath
 . $ALGoHelperPath -local
