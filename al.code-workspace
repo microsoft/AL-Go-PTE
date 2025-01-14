@@ -4,5 +4,15 @@
             "path": ".AL-Go"
         }
     ],
-    "settings": {}
+    "settings": {
+    "CRS.ObjectNamePrefix": "AOR ",
+    "CRS.RemovePrefixFromFilename": true,
+    "al.rootNamespace": "AOR",
+	"al.codeAnalyzers": [
+        "${CodeCop}",
+        "${UICop}",
+        "${PerTenantExtensionCop}",
+        "${analyzerFolder}BusinessCentral.LinterCop.dll"
+    ]
+    }
 }
