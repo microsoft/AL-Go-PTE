@@ -92,6 +92,11 @@ jobs:
           sampleCode: ${{ github.event.inputs.sampleCode }}
           directCommit: ${{ github.event.inputs.directCommit }}
 
+      - name: Create additional folders
+        run: |
+          New-Item -ItemType Directory -Path Docs
+          New-Item -ItemType Directory -Path Tests
+
       - name: Finalize the workflow
         if: always()
         uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v7.2
