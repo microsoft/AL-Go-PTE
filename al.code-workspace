@@ -4,5 +4,50 @@
             "path": ".AL-Go"
         }
     ],
-    "settings": {}
+ "settings": {
+		"alOutline.fixCodeCopMissingParenthesesOnSave": true,
+        "alVarHelper.ignoreALPrefix": "JG ",
+        "CRS.OnSaveAlFileAction": "Rename",
+        "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+        "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+        "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+        "CRS.ObjectNamePrefix": "JG ",
+        "CRS.ExtensionObjectNamePattern": null,
+        "[al]": {
+            "editor.formatOnSave": true
+        },
+        "alOutline.codeCleanupActions": [
+            "RemoveWithStatements",
+            "AddApplicationAreas",
+            "AddToolTips",
+            "RefreshToolTips",
+            "AddTableFieldCaptions",
+            "AddObjectCaptions",
+            "FixKeywordsCase",
+            "FixIdentifiersCase",
+            "ConvertObjectIdsToNames",
+            "AddMissingParentheses",
+            "RemoveUnusedVariables",
+            "SortPermissions",
+            "SortPermissionSetList",
+            "SortReportColumns",
+            "SortTableFields",
+            "SortVariables",
+            "SortCustomizations",
+            "RemoveBeginEnd",
+            "RemoveEmptyTriggers",
+            "RemoveEmptyLines",
+            "RemoveEmptySections",
+            "RemoveStrSubstNoFromError",
+            "FormatDocument",
+            "TrimTrailingWhitespace",
+            "MakeFlowFieldsReadOnly",
+            "RemoveRedundantAppAreas"
+        ],
+        "alOutline.enableCodeCopFixes": true,
+        "alOutline.defaultDataClassification": "CustomerContent",
+        "alOutline.additionalMandatoryAffixesPatterns": [
+            "JG "
+        ]
+	}
 }
