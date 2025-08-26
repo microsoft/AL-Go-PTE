@@ -59,20 +59,20 @@ jobs:
     name: '${{ inputs.projectName }}'
     steps:
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           ref: ${{ inputs.checkoutRef }}
           lfs: true
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@250d7baaa7ad675616c6465fb764eb2494e9639b
+        uses: microsoft/AL-Go/Actions/ReadSettings@82c1b5411ec5f36699702c03723175b06ee7ee6e
         with:
           shell: ${{ inputs.shell }}
           project: ${{ inputs.project }}
           get: type,powerPlatformSolutionFolder,appRevision,appBuild
 
       - name: Build
-        uses: microsoft/AL-Go/Actions/BuildPowerPlatform@250d7baaa7ad675616c6465fb764eb2494e9639b
+        uses: microsoft/AL-Go/Actions/BuildPowerPlatform@82c1b5411ec5f36699702c03723175b06ee7ee6e
         with:
           shell: ${{ inputs.shell }}
           solutionFolder: ${{ inputs.project }}
@@ -83,7 +83,7 @@ jobs:
 
       - name: Calculate Artifact names
         id: calculateArtifactsNames
-        uses: microsoft/AL-Go/Actions/CalculateArtifactNames@250d7baaa7ad675616c6465fb764eb2494e9639b
+        uses: microsoft/AL-Go/Actions/CalculateArtifactNames@82c1b5411ec5f36699702c03723175b06ee7ee6e
         if: success() || failure()
         with:
           shell: ${{ inputs.shell }}
