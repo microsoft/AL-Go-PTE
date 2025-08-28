@@ -29,7 +29,7 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@82c1b5411ec5f36699702c03723175b06ee7ee6e
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@06f80fe0bb7f76e5fa6b321f215eeb68f4ce933f
         with:
           shell: powershell
 
@@ -43,14 +43,14 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "envName=$envName"
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@82c1b5411ec5f36699702c03723175b06ee7ee6e
+        uses: microsoft/AL-Go/Actions/ReadSettings@06f80fe0bb7f76e5fa6b321f215eeb68f4ce933f
         with:
           shell: powershell
           get: powerPlatformSolutionFolder
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@82c1b5411ec5f36699702c03723175b06ee7ee6e
+        uses: microsoft/AL-Go/Actions/ReadSecrets@06f80fe0bb7f76e5fa6b321f215eeb68f4ce933f
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -58,7 +58,7 @@ jobs:
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@82c1b5411ec5f36699702c03723175b06ee7ee6e
+        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@06f80fe0bb7f76e5fa6b321f215eeb68f4ce933f
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -80,7 +80,7 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "solutionFolder=$solutionFolder"
 
       - name: Export and push changes to Power Platform
-        uses: microsoft/AL-Go/Actions/DeployPowerPlatform@82c1b5411ec5f36699702c03723175b06ee7ee6e
+        uses: microsoft/AL-Go/Actions/DeployPowerPlatform@06f80fe0bb7f76e5fa6b321f215eeb68f4ce933f
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -91,7 +91,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@82c1b5411ec5f36699702c03723175b06ee7ee6e
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@06f80fe0bb7f76e5fa6b321f215eeb68f4ce933f
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
