@@ -30,7 +30,7 @@ jobs:
           lfs: true
 
       - name: Troubleshooting
-        uses: microsoft/AL-Go-Actions/Troubleshooting@v7.3
+        uses: newvision365/template-AL_Go_Actions/Troubleshooting@main
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}

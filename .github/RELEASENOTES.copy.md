@@ -94,7 +94,7 @@ Some workflow inputs are now validated early in order to avoid workflows to make
 AL-Go for GitHub settings now has a schema. The following line is added at the beginning to any AL-Go settings files to utilize the schema:
 
 ```
-"$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/<version>/Actions/settings.schema.json"
+"$schema": "https://raw.githubusercontent.com/newvision365/template-AL_Go_Actions/<version>/Actions/settings.schema.json"
 ```
 
 ### Failing pull requests if new warnings are added
