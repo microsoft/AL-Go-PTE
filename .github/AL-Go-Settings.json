@@ -1,5 +1,53 @@
 {
   "$schema": "https://raw.githubusercontent.com/newvision365/template-AL_Go_Actions/main/.Modules/settings.schema.json",
   "type": "PTE",
-  "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main"
+  "templateUrl": "https://github.com/newvision365/template-AL_Go_PTE@main",
+  "deliveryTarget": [],
+  "country": "de",
+  "additionalCountries": [
+    "de",
+    "at",
+    "ch"
+  ],
+  "appSourceCopMandatoryAffixes": [
+    "INO"
+  ],
+  "enableCodeCop": true,
+  "enableUICop": true,
+  "enablePerTenantExtensionCop": true,
+  "doNotBuildTests": true,
+  "doNotRunTests": true,
+  "memoryLimit": "8G",
+  "gitHubRunner": "self-hosted",
+  "templateSha": "920b9e1a65667be8e6d54cb478fae5f2847aa3ea",
+  "environments": [
+    "product-B"
+  ],
+  "deployToproduct-B": {
+    "EnvironmentName": "product-B",
+    "Branches": [
+      "minor*"
+    ],
+    "includeTestAppsInSandboxEnvironment": false,
+    "Scope": "PTE",
+    "SyncMode": "Add",
+    "ContinuousDeployment": true
+  },
+  "useCompilerFolder": true,
+  "doNotPublishApps": true,
+  "ConditionalSettings": [
+    {
+      "branches": [
+        "minor*",
+        "main",
+        "hotfix*",
+        "release*"
+      ],
+      "settings": {
+        "useCompilerFolder": false,
+        "doNotPublishApps": false,
+        "doNotSignApps": true
+      }
+    }
+  ]
 }
