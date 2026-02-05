@@ -34,11 +34,11 @@ jobs:
     name: Pull changes from ${{ inputs.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v8.1
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v8.2
         with:
           shell: powershell
 
@@ -51,14 +51,14 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "envName=$envName"
 
       - name: Read settings
-        uses: microsoft/AL-Go-Actions/ReadSettings@v8.1
+        uses: microsoft/AL-Go-Actions/ReadSettings@v8.2
         with:
           shell: powershell
           get: powerPlatformSolutionFolder
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go-Actions/ReadSecrets@v8.1
+        uses: microsoft/AL-Go-Actions/ReadSecrets@v8.2
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -67,7 +67,7 @@ jobs:
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: microsoft/AL-Go-Actions/DetermineDeploymentEnvironments@v8.1
+        uses: microsoft/AL-Go-Actions/DetermineDeploymentEnvironments@v8.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -89,7 +89,7 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "solutionFolder=$solutionFolder"
 
       - name: Pull changes from Power Platform environment
-        uses: microsoft/AL-Go-Actions/PullPowerPlatformChanges@v8.1
+        uses: microsoft/AL-Go-Actions/PullPowerPlatformChanges@v8.2
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -102,7 +102,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v8.1
+        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v8.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
