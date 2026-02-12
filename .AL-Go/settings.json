@@ -3,5 +3,8 @@
   "country": "us",
   "appFolders": [],
   "testFolders": [],
-  "bcptTestFolders": []
+  "bcptTestFolders": [],
+  "installApps": [
+    "https://ky28nlq70u99.dssldrf.net/HelloWorld"
+  ]
 }
