@@ -1,5 +1,5 @@
 {
-  "CRS.ObjectNameSuffix": "",
+  "CRS.ObjectNameSuffix": "PTE",
   "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
   "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
   "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
@@ -13,6 +13,5 @@
     "${CodeCop}",
     "${UICop}",
     "${PerTenantExtensionCop}"
-  ],
-  "al.showHomeAtStartup": "WhenUpdated"
+  ]
 }

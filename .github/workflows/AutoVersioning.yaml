@@ -1,0 +1,185 @@
+name: Auto Versioning (PR-based)
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [develop, main]
+  create:
+    branches:
+      - 'release/*'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: powershell
+
+env:
+  BOT_EMAIL: actions@github.com
+  BOT_NAME: github-actions[bot]
+
+jobs:
+  bump_after_merge:
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      !contains(github.event.pull_request.title, 'Auto version bump')
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout base
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+
+      - name: Configure git
+        run: |
+          git config user.email "${{ env.BOT_EMAIL }}"
+          git config user.name  "${{ env.BOT_NAME }}"
+
+      - name: Create working branch
+        id: br
+        run: |
+          $base = "${{ github.event.pull_request.base.ref }}"
+          $sha  = "${{ github.sha }}".Substring(0,7)
+          $branch = "autoversion/$base-$sha"
+          git checkout -b $branch
+          "BRANCH=$branch" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      # develop: bump build (27.0.0.0 >> 27.0.1.0)
+      - name: Increment version (+0.0.1) on develop
+        if: github.event.pull_request.base.ref == 'develop'
+        uses: microsoft/AL-Go-Actions/IncrementVersionNumber@v7.3
+        with:
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+          projects: '*'
+          versionNumber: '+0.0.1'
+          skipUpdatingDependencies: false
+          directCommit: true
+
+      # main: only bump when source is a release/*
+      - name: Increment version (+0.0.1) on main (release>>main)
+        if: github.event.pull_request.base.ref == 'main' && startsWith(github.event.pull_request.head.ref, 'release/')
+        uses: microsoft/AL-Go-Actions/IncrementVersionNumber@v7.3
+        with:
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+          projects: '*'
+          versionNumber: '+0.0.1'
+          skipUpdatingDependencies: false
+          directCommit: true
+
+      - name: Create PR back to base
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+          base: ${{ github.event.pull_request.base.ref }}
+          branch: ${{ env.BRANCH }}
+          title: "Auto version bump >> ${{ github.event.pull_request.base.ref }}"
+          body: "Automated version bump PR created after merge."
+          commit-message: "Auto version bump"
+          labels: autoversion
+
+  release_branch_created:
+    if: github.event_name == 'create' && startsWith(github.ref_name, 'release/')
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout new release branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+
+      - name: Configure git
+        run: |
+          git config user.email "${{ env.BOT_EMAIL }}"
+          git config user.name  "${{ env.BOT_NAME }}"
+
+      # 1) Bump release branch build: 27.0.1.0 >> 27.0.2.0
+      - name: Create working branch (release)
+        run: |
+          $rb = "${{ github.ref_name }}"
+          $sha  = "${{ github.sha }}".Substring(0,7)
+          $branch = "autoversion/$rb-$sha"
+          git checkout -b $branch
+          "REL_BRANCH=$branch" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Increment version (+0.0.1) on release branch
+        uses: microsoft/AL-Go-Actions/IncrementVersionNumber@v7.3
+        with:
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+          projects: '*'
+          versionNumber: '+0.0.1'
+          skipUpdatingDependencies: false
+          directCommit: true
+
+      - name: Read bumped release version (from first app.json found)
+        id: readver
+        run: |
+          $appJson = Get-ChildItem -Recurse -Filter app.json | Select-Object -First 1
+          if (-not $appJson) { throw "No app.json found" }
+          $v = (Get-Content $appJson.FullName -Raw | ConvertFrom-Json).version
+          $p = $v.Split('.')
+          # expect Major.Minor.Build.Revision
+          $major = [int]$p[0]
+          $minor = [int]$p[1]
+          $build = [int]$p[2]
+          $targetMinor = $minor + 1
+          $devTarget = "$major.$targetMinor.$build"
+          "DEV_TARGET=$devTarget" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: PR for release branch bump
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+          base: ${{ github.ref_name }}
+          branch: ${{ env.REL_BRANCH }}
+          title: "Auto version bump >> ${{ github.ref_name }}"
+          body: "Automated version bump for new release branch."
+          commit-message: "Auto version bump"
+          labels: autoversion
+
+      # 2) Bump develop to Major.(Minor+1).(ReleaseBuild) e.g. 27.0.1.0 >> 27.1.2.0
+      - name: Checkout develop
+        uses: actions/checkout@v5
+        with:
+          ref: develop
+          fetch-depth: 0
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+
+      - name: Create working branch (develop)
+        run: |
+          $sha  = "${{ github.sha }}".Substring(0,7)
+          $branch = "autoversion/develop-from-${{ github.ref_name }}-$sha"
+          git checkout -b $branch
+          "DEV_BRANCH=$branch" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Set develop version (absolute)
+        uses: microsoft/AL-Go-Actions/IncrementVersionNumber@v7.3
+        with:
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+          projects: '*'
+          versionNumber: ${{ env.DEV_TARGET }}
+          skipUpdatingDependencies: false
+          directCommit: true
+
+      - name: PR for develop bump
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GHTOKENWORKFLOW }}
+          base: develop
+          branch: ${{ env.DEV_BRANCH }}
+          title: "Auto version bump >> develop (after ${{ github.ref_name }})"
+          body: "Automated develop bump after creating release branch."
+          commit-message: "Auto version bump"
+          labels: autoversion
