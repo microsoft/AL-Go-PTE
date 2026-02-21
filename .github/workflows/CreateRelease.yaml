@@ -69,7 +69,7 @@ env:
 jobs:
   CreateRelease:
     needs: [ ]
-    runs-on: [ windows-latest ]
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     outputs:
       artifacts: ${{ steps.determineArtifactsForRelease.outputs.artifacts }}
       releaseId: ${{ steps.createrelease.outputs.releaseId }}
@@ -180,7 +180,7 @@ jobs:
 
   UploadArtifacts:
     needs: [ CreateRelease ]
-    runs-on: [ windows-latest ]
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     name: Upload ${{ matrix.name }}
     strategy:
       matrix: ${{ fromJson(needs.CreateRelease.outputs.artifacts) }}
@@ -268,7 +268,7 @@ jobs:
   CreateReleaseBranch:
     needs: [ CreateRelease, UploadArtifacts ]
     if: ${{ github.event.inputs.createReleaseBranch=='true' }}
-    runs-on: [ windows-latest ]
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -291,7 +291,7 @@ jobs:
   UpdateVersionNumber:
     needs: [ CreateRelease, UploadArtifacts ]
     if: ${{ github.event.inputs.updateVersionNumber!='' }}
-    runs-on: [ windows-latest ]
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -322,7 +322,7 @@ jobs:
   PostProcess:
     needs: [ CreateRelease, UploadArtifacts, CreateReleaseBranch, UpdateVersionNumber ]
     if: always()
-    runs-on: [ windows-latest ]
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
