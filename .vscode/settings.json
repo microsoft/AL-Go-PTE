@@ -1,0 +1,18 @@
+{
+  "CRS.ObjectNameSuffix": "",
+  "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+  "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+  "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+  "CRS.OnSaveAlFileAction": "Reorganize",
+  "CRS.RemoveAffixesFromFilename": true,
+  "CRS.RemovePrefixFromFilename": true,
+  "CRS.RemoveSuffixFromFilename": true,
+  "al.enableCodeAnalysis": true,
+  "al.enableCodeActions": true,
+  "al.codeAnalyzers": [
+    "${CodeCop}",
+    "${UICop}",
+    "${PerTenantExtensionCop}"
+  ],
+  "al.showHomeAtStartup": "WhenUpdated"
+}
