@@ -40,7 +40,7 @@ permissions:
 jobs:
   IncrementVersionNumber:
     needs: [ ]
-    runs-on: [ windows-latest ]
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     permissions:
       actions: read
       contents: write
