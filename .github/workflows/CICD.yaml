@@ -32,7 +32,7 @@ jobs:
       github.event_name != 'push' ||
       !contains(toJson(github.event.commits), '[skip ci]')
     needs: [ ]
-    runs-on: [vm-algo-win2022]
+    runs-on: [windows-latest, vm-algo-win2022]
     outputs:
       telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
       environmentsMatrixJson: ${{ steps.DetermineDeploymentEnvironments.outputs.EnvironmentsMatrixJson }}
@@ -155,7 +155,7 @@ jobs:
 
   CheckForUpdates:
     needs: [ Initialization ]
-    runs-on: [vm-algo-win2022]
+    runs-on: [windows-latest, vm-algo-win2022]
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -212,7 +212,7 @@ jobs:
   CodeAnalysisUpload:
     needs: [ Initialization, Build ]
     if: (!cancelled()) && (needs.Initialization.outputs.trackALAlertsInGitHub == 'True')
-    runs-on: [vm-algo-win2022]
+    runs-on: [windows-latest, vm-algo-win2022]
     name: Code Analysis Processing
     steps:
       - name: Checkout
@@ -243,7 +243,7 @@ jobs:
   DeployALDoc:
     needs: [ Initialization, Build ]
     if: (!cancelled()) && (needs.Build.result == 'success' || needs.Build.result == 'skipped') && needs.Initialization.outputs.generateALDocArtifact == 1 && github.ref_name == 'main'
-    runs-on: [vm-algo-win2022]
+    runs-on: [windows-latest, vm-algo-win2022]
     name: Deploy Reference Documentation
     permissions:
       contents: read
@@ -369,7 +369,7 @@ jobs:
       matrix:
         deliveryTarget: ${{ fromJson(needs.Initialization.outputs.deliveryTargetsJson) }}
       fail-fast: false
-    runs-on: [vm-algo-win2022]
+    runs-on: [windows-latest, vm-algo-win2022]
     name: Deliver to ${{ matrix.deliveryTarget }}
     steps:
       - name: Checkout
@@ -407,7 +407,7 @@ jobs:
   PostProcess:
     needs: [ Initialization, Build, Deploy, Deliver, DeployALDoc, CodeAnalysisUpload ]
     if: (!cancelled())
-    runs-on: [vm-algo-win2022]
+    runs-on: [windows-latest, vm-algo-win2022]
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
