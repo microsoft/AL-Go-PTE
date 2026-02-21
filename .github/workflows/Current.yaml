@@ -21,7 +21,7 @@ env:
 jobs:
   Initialization:
     needs: [ ]
-    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
+    runs-on: [vm-algo-win2022]
     outputs:
       projects: ${{ steps.determineProjectsToBuild.outputs.ProjectsJson }}
       projectDependenciesJson: ${{ steps.determineProjectsToBuild.outputs.ProjectDependenciesJson }}
@@ -108,7 +108,7 @@ jobs:
   PostProcess:
     needs: [ Initialization, Build ]
     if: always()
-    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
+    runs-on: [vm-algo-win2022]
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
