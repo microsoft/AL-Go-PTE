@@ -10,5 +10,6 @@
     "release/*"
   ],
   "versioningStrategy": 3,
-  "pullRequestTrigger": "pull_request"
+  "pullRequestTrigger": "pull_request",
+  "templateSha": "62683d6c71618bc3249ff55a950fd8ab3a380925"
 }
