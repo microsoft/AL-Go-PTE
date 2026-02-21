@@ -1,7 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v8.2/.Modules/settings.schema.json",
-  "country": "us",
-  "appFolders": [],
+  "country": "gb",
+  "type": "PTE",
+  "trackALAlertsInGitHub": true,
+  "enableCodeCop": true,
+  "enableUICop": true,
+  "enablePerTenantExtensionCop": true,
+  "failOn": "warning",
+  "versioningStrategy": 3,
+  "appFolders": [","],
   "testFolders": [],
   "bcptTestFolders": []
 }
