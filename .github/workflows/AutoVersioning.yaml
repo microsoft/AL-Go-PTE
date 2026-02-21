@@ -24,7 +24,8 @@ jobs:
     if: >
       github.event_name == 'pull_request' &&
       github.event.pull_request.merged == true &&
-      !contains(github.event.pull_request.title, 'Auto version bump')
+      !contains(github.event.pull_request.title, 'Auto version bump') &&
+      !contains(github.event.pull_request.title, '[skip ci]')
     runs-on: windows-latest
     permissions:
       contents: write
