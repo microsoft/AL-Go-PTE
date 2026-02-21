@@ -1,5 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v8.2/.Modules/settings.schema.json",
   "type": "PTE",
-  "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main"
+  "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
+  "githubRunner": "self-hosted",
+  "githubRunnerShell": "powershell",
+  "CICDPushBranches": [
+    "main",
+    "develop",
+    "release/*"
+  ],
+  "versioningStrategy": 3,
+  "pullRequestTrigger": "pull_request"
 }
