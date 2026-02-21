@@ -8,7 +8,9 @@
   "enablePerTenantExtensionCop": true,
   "failOn": "warning",
   "versioningStrategy": 3,
-  "appFolders": [","],
+  "appFolders": [
+    "."
+  ],
   "testFolders": [],
   "bcptTestFolders": []
 }
