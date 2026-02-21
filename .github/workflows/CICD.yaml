@@ -30,7 +30,7 @@ jobs:
   Initialization:
     if: >
       github.event_name != 'push' ||
-      !contains(toJson(github.event.commits), '[skip cli]')
+      !contains(toJson(github.event.commits), '[skip ci]')
     needs: [ ]
     runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     outputs:
