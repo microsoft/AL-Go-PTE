@@ -4,9 +4,6 @@ on:
   pull_request:
     types: [closed]
     branches: [develop, main]
-  create:
-    branches:
-      - 'release/*'
 
 permissions:
   contents: read
