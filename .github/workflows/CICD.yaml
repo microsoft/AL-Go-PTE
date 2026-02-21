@@ -28,6 +28,7 @@ env:
 
 jobs:
   Initialization:
+    if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip cli]')
     needs: [ ]
     runs-on: [ windows-latest ]
     outputs:
