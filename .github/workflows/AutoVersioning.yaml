@@ -6,7 +6,7 @@ on:
     branches: [develop, main]
   create:
     branches:
-      - 'release/*'
+      - [release/**]
 
 permissions:
   contents: read
@@ -26,7 +26,7 @@ jobs:
       github.event.pull_request.merged == true &&
       !contains(github.event.pull_request.title, 'Auto version bump') &&
       !contains(github.event.pull_request.title, '[skip ci]')
-    runs-on: windows-latest
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     permissions:
       contents: write
       pull-requests: write
@@ -88,7 +88,7 @@ jobs:
 
   release_branch_created:
     if: github.event_name == 'create' && startsWith(github.ref_name, 'release/')
-    runs-on: windows-latest
+    runs-on: [self-hosted, Windows, X64, al-go, vm-algo-win2022]
     permissions:
       contents: write
       pull-requests: write
