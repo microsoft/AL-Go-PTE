@@ -37,6 +37,7 @@ env:
 jobs:
   Initialization:
     needs: [ ]
+    if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]')
     runs-on: [ windows-latest ]
     outputs:
       telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -160,6 +161,7 @@ jobs:
 
   CheckForUpdates:
     needs: [ Initialization ]
+    if: needs.Initialization.result != 'skipped'
     runs-on: [ windows-latest ]
     steps:
       - name: Checkout
@@ -191,7 +193,7 @@ jobs:
 
   Build:
     needs: [ Initialization ]
-    if: (!failure()) && (!cancelled()) && fromJson(needs.Initialization.outputs.buildOrderJson)[0].projectsCount > 0
+    if: (!failure()) && (!cancelled()) && needs.Initialization.result != 'skipped' && fromJson(needs.Initialization.outputs.buildOrderJson)[0].projectsCount > 0
     strategy:
       matrix:
         include: ${{ fromJson(needs.Initialization.outputs.buildOrderJson)[0].buildDimensions }}
@@ -216,7 +218,7 @@ jobs:
 
   BuildPP:
     needs: [ Initialization ]
-    if: (!failure()) && (!cancelled()) && needs.Initialization.outputs.powerPlatformSolutionFolder != ''
+    if: (!failure()) && (!cancelled()) && needs.Initialization.result != 'skipped' && needs.Initialization.outputs.powerPlatformSolutionFolder != ''
     name: Build PowerPlatform Solution
     uses: ./.github/workflows/_BuildPowerPlatformSolution.yaml
     secrets: inherit
@@ -230,7 +232,7 @@ jobs:
 
   CodeAnalysisUpload:
     needs: [ Initialization, Build ]
-    if: (!cancelled()) && (needs.Initialization.outputs.trackALAlertsInGitHub == 'True')
+    if: (!cancelled()) && needs.Initialization.result != 'skipped' && (needs.Initialization.outputs.trackALAlertsInGitHub == 'True')
     runs-on: [ windows-latest ]
     name: Code Analysis Processing
     steps:
@@ -261,7 +263,7 @@ jobs:
 
   DeployALDoc:
     needs: [ Initialization, Build ]
-    if: (!cancelled()) && (needs.Build.result == 'success' || needs.Build.result == 'skipped') && needs.Initialization.outputs.generateALDocArtifact == 1 && github.ref_name == 'main'
+    if: (!cancelled()) && needs.Initialization.result != 'skipped' && (needs.Build.result == 'success' || needs.Build.result == 'skipped') && needs.Initialization.outputs.generateALDocArtifact == 1 && github.ref_name == 'main'
     runs-on: [ windows-latest ]
     name: Deploy Reference Documentation
     permissions:
@@ -315,7 +317,7 @@ jobs:
 
   Deploy:
     needs: [ Initialization, Build, BuildPP ]
-    if: (!cancelled()) && (needs.Build.result == 'success' || needs.Build.result == 'skipped') && (needs.BuildPP.result == 'success' || needs.BuildPP.result == 'skipped') && needs.Initialization.outputs.environmentCount > 0
+    if: (!cancelled()) && needs.Initialization.result != 'skipped' && (needs.Build.result == 'success' || needs.Build.result == 'skipped') && (needs.BuildPP.result == 'success' || needs.BuildPP.result == 'skipped') && needs.Initialization.outputs.environmentCount > 0
     strategy: ${{ fromJson(needs.Initialization.outputs.environmentsMatrixJson) }}
     runs-on: ${{ fromJson(matrix.os) }}
     name: Deploy to ${{ matrix.environment }}
@@ -383,7 +385,7 @@ jobs:
 
   Deliver:
     needs: [ Initialization, Build, BuildPP ]
-    if: (!cancelled()) && (needs.Build.result == 'success' || needs.Build.result == 'skipped') && (needs.BuildPP.result == 'success' || needs.BuildPP.result == 'skipped') && needs.Initialization.outputs.deliveryTargetsJson != '[]'
+    if: (!cancelled()) && needs.Initialization.result != 'skipped' && (needs.Build.result == 'success' || needs.Build.result == 'skipped') && (needs.BuildPP.result == 'success' || needs.BuildPP.result == 'skipped') && needs.Initialization.outputs.deliveryTargetsJson != '[]'
     strategy:
       matrix:
         deliveryTarget: ${{ fromJson(needs.Initialization.outputs.deliveryTargetsJson) }}
@@ -425,7 +427,7 @@ jobs:
 
   PostProcess:
     needs: [ Initialization, Build, BuildPP, Deploy, Deliver, DeployALDoc, CodeAnalysisUpload ]
-    if: (!cancelled())
+    if: (!cancelled()) && needs.Initialization.result != 'skipped'
     runs-on: [ windows-latest ]
     steps:
       - name: Checkout
