@@ -28,7 +28,9 @@ env:
 
 jobs:
   Initialization:
-    if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[ skip ci ]')
+    if: >
+      github.event_name != 'push' ||
+      !contains(toJson(github.event.commits), '[skip cli]')
     needs: [ ]
     runs-on: [ windows-latest ]
     outputs:
