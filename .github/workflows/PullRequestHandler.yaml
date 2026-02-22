@@ -1,6 +1,7 @@
 name: 'Pull Request Build'
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ 'main', 'develop', 'release/*' ]
   merge_group:
