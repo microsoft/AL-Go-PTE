@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v8.2/.Modules/settings.schema.json",
   "country": "gb",
   "type": "PTE",
-  "trackALAlertsInGitHub": true,
+  "trackALAlertsInGitHub": false,
   "enableCodeCop": true,
   "enableUICop": true,
   "enablePerTenantExtensionCop": true,
