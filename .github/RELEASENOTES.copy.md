@@ -1,9 +1,8 @@
-## preview
-
-Note that when using the preview version of AL-Go for GitHub, we recommend you Update your AL-Go system files, as soon as possible when informed that an update is available.
+## v8.3
 
 ### Issues
 
+- Issue 2107 Publish a specific build mode to an environment
 - Issue 1915 CICD fails on releases/26.x branch - '26.x' cannot be recognized as a semantic version string
 
 ### The default pull request trigger is changing
