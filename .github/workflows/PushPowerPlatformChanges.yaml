@@ -25,11 +25,11 @@ jobs:
     name: Push changes to ${{ inputs.environment }}
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Initialize the workflow
         id: init
-        uses: microsoft/AL-Go/Actions/WorkflowInitialize@6ce99a8c1b840818da308fae257c14ed6bf76c70
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@17d656a4fde5f320c4496f80198ce5269f0e296e
         with:
           shell: powershell
 
@@ -43,14 +43,14 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "envName=$envName"
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@6ce99a8c1b840818da308fae257c14ed6bf76c70
+        uses: microsoft/AL-Go/Actions/ReadSettings@17d656a4fde5f320c4496f80198ce5269f0e296e
         with:
           shell: powershell
           get: powerPlatformSolutionFolder
 
       - name: Read secrets
         id: ReadSecrets
-        uses: microsoft/AL-Go/Actions/ReadSecrets@6ce99a8c1b840818da308fae257c14ed6bf76c70
+        uses: microsoft/AL-Go/Actions/ReadSecrets@17d656a4fde5f320c4496f80198ce5269f0e296e
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -58,7 +58,7 @@ jobs:
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@6ce99a8c1b840818da308fae257c14ed6bf76c70
+        uses: microsoft/AL-Go/Actions/DetermineDeploymentEnvironments@17d656a4fde5f320c4496f80198ce5269f0e296e
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -80,7 +80,7 @@ jobs:
           Add-Content -encoding utf8 -Path $env:GITHUB_ENV -Value "solutionFolder=$solutionFolder"
 
       - name: Export and push changes to Power Platform
-        uses: microsoft/AL-Go/Actions/DeployPowerPlatform@6ce99a8c1b840818da308fae257c14ed6bf76c70
+        uses: microsoft/AL-Go/Actions/DeployPowerPlatform@17d656a4fde5f320c4496f80198ce5269f0e296e
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
@@ -91,7 +91,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@6ce99a8c1b840818da308fae257c14ed6bf76c70
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@17d656a4fde5f320c4496f80198ce5269f0e296e
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
