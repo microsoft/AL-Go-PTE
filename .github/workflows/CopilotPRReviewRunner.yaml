@@ -49,7 +49,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Read settings
-        uses: microsoft/AL-Go/Actions/ReadSettings@959519dfe53da49b83bd5cf1f43eaa0be7ca5301
+        uses: microsoft/AL-Go/Actions/ReadSettings@fb27afbcab20378ab0ac0978e7efe4131bdc0962
         with:
           shell: pwsh
           project: ''
@@ -58,7 +58,7 @@ jobs:
 
       - name: Resolve review context
         id: context
-        uses: microsoft/AL-Go/Actions/ReviewAgent@959519dfe53da49b83bd5cf1f43eaa0be7ca5301
+        uses: microsoft/AL-Go/Actions/ReviewAgent@fb27afbcab20378ab0ac0978e7efe4131bdc0962
         with:
           shell: pwsh
           phase: context
@@ -95,21 +95,21 @@ jobs:
           node-version: 24
 
       - name: Setup Copilot CLI
-        uses: microsoft/AL-Go/Actions/ReviewAgent@959519dfe53da49b83bd5cf1f43eaa0be7ca5301
+        uses: microsoft/AL-Go/Actions/ReviewAgent@fb27afbcab20378ab0ac0978e7efe4131bdc0962
         with:
           shell: pwsh
           phase: prepare
 
       - name: Setup BCQuality
         id: setup
-        uses: microsoft/AL-Go/Actions/SetupBCQuality@959519dfe53da49b83bd5cf1f43eaa0be7ca5301
+        uses: microsoft/AL-Go/Actions/SetupBCQuality@fb27afbcab20378ab0ac0978e7efe4131bdc0962
         with:
           shell: pwsh
           bcqualitySettingsJson: ${{ needs.prepare.outputs.bcqualitySettingsJson }}
           token: ${{ secrets.BCQUALITY_TOKEN }}
 
       - name: Run Copilot PR review
-        uses: microsoft/AL-Go/Actions/ReviewAgent@959519dfe53da49b83bd5cf1f43eaa0be7ca5301
+        uses: microsoft/AL-Go/Actions/ReviewAgent@fb27afbcab20378ab0ac0978e7efe4131bdc0962
         with:
           shell: pwsh
           phase: generate
@@ -173,7 +173,7 @@ jobs:
           path: ${{ github.workspace }}/review-output
 
       - name: Publish Copilot PR review
-        uses: microsoft/AL-Go/Actions/ReviewAgent@959519dfe53da49b83bd5cf1f43eaa0be7ca5301
+        uses: microsoft/AL-Go/Actions/ReviewAgent@fb27afbcab20378ab0ac0978e7efe4131bdc0962
         with:
           shell: pwsh
           phase: post
